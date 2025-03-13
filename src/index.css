@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Press Start 2P", system-ui;
+  --font-body: "Fira Sans", "sans-serif";
+}
