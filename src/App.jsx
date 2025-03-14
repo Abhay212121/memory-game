@@ -1,19 +1,22 @@
-import Card from "./components/card";
-import getData from "./utills/data";
+import Game from "./components/Game";
+import Welcome from "./components/Welcome";
+import { useState } from "react";
 
 function App() {
-  getData("11061");
+  const [difficulty, setDifficulty] = useState("");
+  const [animeId, setAnimeId] = useState(0);
 
   return (
-    <div className="flex gap-4">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-    </div>
+    <>
+      {/* <Welcome
+        setDifficulty={setDifficulty}
+        setAnimeId={setAnimeId}
+      /> */}
+      <Game
+        animeId={40748}
+        difficulty={"Normal"}
+      />
+    </>
   );
 }
 
