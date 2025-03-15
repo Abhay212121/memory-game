@@ -1,4 +1,4 @@
-function Welcome({ setDifficulty, setAnimeId }) {
+function Welcome({ setDifficulty, setAnimeId, setFlag }) {
   return (
     <div className="w-screen h-screen font-display flex flex-col items-center pt-50 ">
       <div className="text-3xl text-black p-20 flex justify-evenly items-start gap-80  ">
@@ -33,9 +33,9 @@ function Welcome({ setDifficulty, setAnimeId }) {
           </button>
           <button
             className="hover:cursor-pointer focus:outline-2"
-            onClick={() => setAnimeId(14719)}
+            onClick={() => setAnimeId(11061)}
           >
-            JOJO
+            HxH
           </button>
           <button
             className="hover:cursor-pointer focus:outline-2"
@@ -58,7 +58,10 @@ function Welcome({ setDifficulty, setAnimeId }) {
         </div>
       </div>
       <div>
-        <button className="hover:cursor-pointer text-4xl border-4 p-2 rounded-2xl">
+        <button
+          className="hover:cursor-pointer text-4xl border-4 p-2 rounded-2xl"
+          onClick={() => setFlag(false)}
+        >
           Play
         </button>
       </div>

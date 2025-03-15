@@ -5,17 +5,23 @@ import { useState } from "react";
 function App() {
   const [difficulty, setDifficulty] = useState("");
   const [animeId, setAnimeId] = useState(0);
+  const [flag, setFlag] = useState(true);
 
   return (
     <>
-      {/* <Welcome
-        setDifficulty={setDifficulty}
-        setAnimeId={setAnimeId}
-      /> */}
-      <Game
-        animeId={40748}
-        difficulty={"Normal"}
-      />
+      {flag == true && (
+        <Welcome
+          setDifficulty={setDifficulty}
+          setAnimeId={setAnimeId}
+          setFlag={setFlag}
+        />
+      )}
+      {flag == false && (
+        <Game
+          animeId={animeId}
+          difficulty={difficulty}
+        />
+      )}
     </>
   );
 }
