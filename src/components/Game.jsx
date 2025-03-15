@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./card";
+import GameOver from "./Gameover";
+import Congrats from "./Congrats";
 
 function Game({ animeId, difficulty }) {
   const [data, setData] = useState([]);
@@ -8,10 +10,10 @@ function Game({ animeId, difficulty }) {
   const [displayArr, setDisplayArr] = useState([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [highScore, setHighScore] = useState(0);
 
   //fetching the data
   useEffect(() => {
-    console.log(difficulty);
     let url = `https://api.jikan.moe/v4/anime/${animeId}/characters`;
     fetch(url)
       .then((response) => response.json())
@@ -38,7 +40,7 @@ function Game({ animeId, difficulty }) {
     } else if (difficulty == "medium") {
       tempArr = tempArr.splice(0, 10);
     } else if (difficulty == "hard") {
-      tempArr = tempArr.splice(0, 16);
+      tempArr = tempArr.splice(0, 15);
     }
     setDisplayArr(tempArr);
   }, [data]);
@@ -58,7 +60,6 @@ function Game({ animeId, difficulty }) {
 
   function handleCardClick(element) {
     if (selectedArr.includes(element)) {
-      console.log("game over");
       setGameOver(true);
     } else {
       let tempArr = [...selectedArr];
@@ -71,29 +72,53 @@ function Game({ animeId, difficulty }) {
 
   return (
     <>
-      <div className="h-screen flex-col gap-0 flex items-center justify-center w-screen bg-amber-300">
-        <div
-          className={
-            difficulty == "easy"
-              ? "flex"
-              : "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 "
-          }
-        >
-          {displayArr.map((element) => {
-            return (
-              <Card
-                img={element.character.images.jpg.image_url}
-                name={element.character.name}
-                key={element.character.name}
-                difficulty={difficulty}
-                handleCardClick={handleCardClick}
-                element={element}
-              />
-            );
-          })}
+      {loading == true ? (
+        <p>loading....</p>
+      ) : (
+        <div className="h-screen flex-col gap-0 flex items-center justify-center w-screen bg-amber-300">
+          <div
+            className={
+              difficulty == "easy"
+                ? "flex"
+                : difficulty == "medium"
+                ? "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 bg-black"
+                : "grid grid-flow-col grid-rows-3 gap-y-3 bg-black"
+            }
+          >
+            {displayArr.map((element) => {
+              return (
+                <Card
+                  img={element.character.images.jpg.image_url}
+                  name={element.character.name}
+                  key={element.character.name}
+                  difficulty={difficulty}
+                  handleCardClick={handleCardClick}
+                  element={element}
+                />
+              );
+            })}
+          </div>
+          <div className="text-4xl">
+            {difficulty == "easy"
+              ? `${score}/5`
+              : difficulty == "medium"
+              ? `${score}/10`
+              : `${score}/15`}
+          </div>
+          {gameOver ? <GameOver /> : null}
+          {difficulty == "easy" ? (
+            score == 5 ? (
+              <Congrats />
+            ) : null
+          ) : difficulty == "medium" ? (
+            score == 10 ? (
+              <Congrats />
+            ) : null
+          ) : score == 15 ? (
+            <Congrats />
+          ) : null}
         </div>
-        <div className="text-4xl">{gameOver ? "Game Over" : score}</div>
-      </div>
+      )}
     </>
   );
 }

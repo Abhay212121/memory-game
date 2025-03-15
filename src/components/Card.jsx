@@ -17,13 +17,20 @@ function Card({ img, name, difficulty, handleCardClick, element }) {
       onClick={() => {
         handleCardClick(element);
       }}
-      className="p-4 flex flex-col justify-center border-2 gap-4 w-60 items-center bg-black"
+      className="flex flex-col justify-center gap-2 py-5 w-60 items-center bg-black hover:cursor-pointer"
     >
-      <div>
+      <div className="p-5 box-border">
         <img
           src={img}
           alt="image not found"
-          className="w-60 h-70 m-auto"
+          // className="w-60 h-70 m-auto"
+          className={
+            difficulty == "easy"
+              ? "w-60 h-70 m-auto"
+              : difficulty == "medium"
+              ? "w-60 h-70 m-auto"
+              : "w-40 "
+          }
         />
       </div>
       {difficulty == "hard" ? null : (
