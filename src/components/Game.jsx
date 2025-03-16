@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Card from "./card";
 import GameOver from "./Gameover";
 import Congrats from "./Congrats";
+import Loading from "./Loading";
 
 function Game({ animeId, difficulty }) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedArr, setSelectedArr] = useState([]);
   const [displayArr, setDisplayArr] = useState([]);
   const [score, setScore] = useState(0);
@@ -22,7 +22,6 @@ function Game({ animeId, difficulty }) {
       .then((data) => data.splice(data.length - 20, 20))
       .then((data) => {
         setData(data);
-        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [animeId]);
@@ -72,53 +71,50 @@ function Game({ animeId, difficulty }) {
 
   return (
     <>
-      {loading == true ? (
-        <p>loading....</p>
-      ) : (
-        <div className="h-screen flex-col gap-0 flex items-center justify-center w-screen bg-amber-300">
-          <div
-            className={
-              difficulty == "easy"
-                ? "flex"
-                : difficulty == "medium"
-                ? "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 bg-black"
-                : "grid grid-flow-col grid-rows-3 gap-y-3 bg-black"
-            }
-          >
-            {displayArr.map((element) => {
-              return (
-                <Card
-                  img={element.character.images.jpg.image_url}
-                  name={element.character.name}
-                  key={element.character.name}
-                  difficulty={difficulty}
-                  handleCardClick={handleCardClick}
-                  element={element}
-                />
-              );
-            })}
-          </div>
-          <div className="text-4xl">
-            {difficulty == "easy"
-              ? `${score}/5`
+      <Loading />
+      <div className="h-screen flex-col gap-0 flex items-center justify-center w-screen bg-black">
+        <div
+          className={
+            difficulty == "easy"
+              ? `flex`
               : difficulty == "medium"
-              ? `${score}/10`
-              : `${score}/15`}
-          </div>
-          {gameOver ? <GameOver /> : null}
-          {difficulty == "easy" ? (
-            score == 5 ? (
-              <Congrats />
-            ) : null
-          ) : difficulty == "medium" ? (
-            score == 10 ? (
-              <Congrats />
-            ) : null
-          ) : score == 15 ? (
-            <Congrats />
-          ) : null}
+              ? "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 bg-black"
+              : "grid grid-flow-col grid-rows-3 gap-y-3 bg-black"
+          }
+        >
+          {displayArr.map((element) => {
+            return (
+              <Card
+                img={element.character.images.jpg.image_url}
+                name={element.character.name}
+                key={element.character.name}
+                difficulty={difficulty}
+                handleCardClick={handleCardClick}
+                element={element}
+              />
+            );
+          })}
         </div>
-      )}
+        <div className="text-4xl text-white">
+          {difficulty == "easy"
+            ? `${score}/5`
+            : difficulty == "medium"
+            ? `${score}/10`
+            : `${score}/15`}
+        </div>
+        {gameOver ? <GameOver /> : null}
+        {difficulty == "easy" ? (
+          score == 5 ? (
+            <Congrats />
+          ) : null
+        ) : difficulty == "medium" ? (
+          score == 10 ? (
+            <Congrats />
+          ) : null
+        ) : score == 15 ? (
+          <Congrats />
+        ) : null}
+      </div>
     </>
   );
 }
