@@ -7,9 +7,14 @@ export default function GameOver({
   setFlag,
   setGameOver,
   setSelectedArr,
+  difficulty,
 }) {
   return (
-    <div className="h-screen w-screen flex items-center justify-center absolute ">
+    <div
+      className={`h-screen w-screen flex items-center justify-center absolute ${
+        difficulty == "hard" ? "mb-100 " : null
+      }`}
+    >
       <div
         className={`w-1/2 flex items-center justify-around flex-col bg-black h-2/3 font-display gap-3 text-white border-8 border-white rounded-md p-8  `}
       >

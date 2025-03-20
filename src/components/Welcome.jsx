@@ -106,11 +106,11 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
             onClick={() => {
               setVisible(true);
               if (animeId == 0 && difficulty == "") {
-                setAlertData("select the details");
+                setAlertData("Select the details");
               } else if (animeId == 0) {
                 setAlertData("Select an anime");
               } else if (difficulty == "") {
-                setAlertData("choose difficulty");
+                setAlertData("Choose difficulty");
               } else {
                 setFlag(false);
               }
@@ -122,7 +122,7 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
         {alertData == "" ? (
           visible == true ? (
             <div className="bg-white p-3 text-xl rounded-2xl mt-5 border-4 animate-pulse">
-              <p>select the details</p>
+              <p>Select the details</p>
             </div>
           ) : null
         ) : (
