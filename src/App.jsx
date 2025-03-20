@@ -1,6 +1,4 @@
-import Footer from "./components/Footer";
 import Game from "./components/Game";
-import Loading from "./components/Loading";
 import Welcome from "./components/Welcome";
 import { useState } from "react";
 
@@ -11,6 +9,16 @@ function App() {
 
   return (
     <>
+      <div className="absolute top-22 left-15 hover:cursor-pointer hover:animate-pulse">
+        <img
+          src="/images/logo.png"
+          alt="image not found"
+          className="w-50"
+          onClick={() => {
+            setFlag(true);
+          }}
+        />
+      </div>
       {flag == true && (
         <Welcome
           difficulty={difficulty}
@@ -24,6 +32,7 @@ function App() {
         <Game
           animeId={animeId}
           difficulty={difficulty}
+          setFlag={setFlag}
         />
       )}
     </>

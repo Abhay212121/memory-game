@@ -1,6 +1,9 @@
-import Footer from "./Footer";
+import { useState } from "react";
 
 function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
+  const [alertData, setAlertData] = useState("");
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
       <div className="w-screen h-screen font-body flex flex-col items-center pt-50 bg-[url(images/bg01.jpg)] bg-center bg-cover">
@@ -11,7 +14,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 difficulty == "easy" ? "text-red-500" : ""
               }`}
-              onClick={() => setDifficulty("easy")}
+              onClick={() => {
+                setDifficulty("easy");
+              }}
             >
               Easy
             </button>
@@ -19,7 +24,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 difficulty == "medium" ? "text-red-500" : ""
               }`}
-              onClick={() => setDifficulty("medium")}
+              onClick={() => {
+                setDifficulty("medium");
+              }}
             >
               Medium
             </button>
@@ -27,7 +34,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 difficulty == "hard" ? "text-red-500" : ""
               }`}
-              onClick={() => setDifficulty("hard")}
+              onClick={() => {
+                setDifficulty("hard");
+              }}
             >
               Hard
             </button>
@@ -38,7 +47,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 animeId == 1735 ? "text-red-500" : ""
               }`}
-              onClick={() => setAnimeId(1735)}
+              onClick={() => {
+                setAnimeId(1735);
+              }}
             >
               Naruto
             </button>
@@ -46,7 +57,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 animeId == 11061 ? "text-red-500" : ""
               }`}
-              onClick={() => setAnimeId(11061)}
+              onClick={() => {
+                setAnimeId(11061);
+              }}
             >
               HxH
             </button>
@@ -54,7 +67,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 animeId == 40748 ? "text-red-500" : ""
               }`}
-              onClick={() => setAnimeId(40748)}
+              onClick={() => {
+                setAnimeId(40748);
+              }}
             >
               Jujutsu Kasien
             </button>
@@ -62,7 +77,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 animeId == 38000 ? "text-red-500" : ""
               }`}
-              onClick={() => setAnimeId(38000)}
+              onClick={() => {
+                setAnimeId(38000);
+              }}
             >
               Demon Slayer
             </button>
@@ -70,7 +87,9 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
               className={`hover:cursor-pointer ${
                 animeId == 16498 ? "text-red-500" : ""
               }`}
-              onClick={() => setAnimeId(16498)}
+              onClick={() => {
+                setAnimeId(16498);
+              }}
             >
               Attack on Titan
             </button>
@@ -79,13 +98,34 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
         <div>
           <button
             className="hover:cursor-pointer text-white text-4xl border-4 p-2 rounded-2xl w-2xs"
-            onClick={() => setFlag(false)}
+            onClick={() => {
+              setVisible(true);
+              if (animeId == 0 && difficulty == "") {
+                setAlertDatalertData("select the details");
+              } else if (animeId == 0) {
+                setAlertData("Select an anime");
+              } else if (difficulty == "") {
+                setAlertData("choose difficulty");
+              } else {
+                setFlag(false);
+              }
+            }}
           >
             Play
           </button>
         </div>
+        {alertData == "" ? (
+          visible == true ? (
+            <div className="bg-white p-3 text-xl rounded-2xl mt-5 border-4 animate-pulse">
+              <p>select the details</p>
+            </div>
+          ) : null
+        ) : (
+          <div className="bg-white p-3 text-xl rounded-2xl mt-5 border-4 animate-pulse">
+            <p>{alertData}</p>
+          </div>
+        )}
       </div>
-      <Footer />
     </>
   );
 }

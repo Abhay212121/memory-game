@@ -3,14 +3,16 @@ import Card from "./card";
 import GameOver from "./Gameover";
 import Congrats from "./Congrats";
 import Loading from "./Loading";
+import Scoreboard from "./Scoreboard";
 
-function Game({ animeId, difficulty }) {
+function Game({ animeId, difficulty, setFlag }) {
   const [data, setData] = useState([]);
   const [selectedArr, setSelectedArr] = useState([]);
   const [displayArr, setDisplayArr] = useState([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [highScore, setHighScore] = useState(0);
+  const [visible, setVisible] = useState(false);
 
   //fetching the data
   useEffect(() => {
@@ -39,14 +41,13 @@ function Game({ animeId, difficulty }) {
     } else if (difficulty == "medium") {
       tempArr = tempArr.splice(0, 10);
     } else if (difficulty == "hard") {
-      tempArr = tempArr.splice(0, 15);
+      tempArr = tempArr.splice(0, 16);
     }
     setDisplayArr(tempArr);
   }, [data]);
 
   //checking the difficulty level and generating the temporaray random array.
-
-  function shuffleTheArr() {
+  useEffect(() => {
     let tempArr = [...displayArr];
     for (let i = tempArr.length - 1; i >= 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -55,7 +56,7 @@ function Game({ animeId, difficulty }) {
       tempArr[j] = temp;
     }
     setDisplayArr(tempArr);
-  }
+  }, [score]);
 
   function handleCardClick(element) {
     if (selectedArr.includes(element)) {
@@ -65,21 +66,39 @@ function Game({ animeId, difficulty }) {
       tempArr.push(element);
       setSelectedArr(tempArr);
       setScore((score) => score + 1);
-      shuffleTheArr();
     }
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true);
+    }, 2200);
+  }, []);
 
   return (
     <>
       <Loading />
-      <div className="h-screen flex-col gap-0 flex items-center justify-center w-screen bg-black">
+      <Scoreboard
+        score={score}
+        highScore={highScore}
+        setHighScore={setHighScore}
+      />
+      <div
+        className={
+          difficulty == "hard"
+            ? `h-fit flex-col gap-0 ${
+                visible ? "flex" : "hidden"
+              } items-center justify-center w-screen bg-black`
+            : "h-screen flex-col gap-0 flex items-center justify-center w-screen bg-black"
+        }
+      >
         <div
           className={
             difficulty == "easy"
               ? `flex`
               : difficulty == "medium"
               ? "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 bg-black"
-              : "grid grid-flow-col grid-rows-3 gap-y-3 bg-black"
+              : "grid grid-flow-col grid-rows-4 gap-y-3 bg-black"
           }
         >
           {displayArr.map((element) => {
@@ -95,14 +114,23 @@ function Game({ animeId, difficulty }) {
             );
           })}
         </div>
-        <div className="text-4xl text-white">
+        <div className="text-4xl text-white font-body">
           {difficulty == "easy"
             ? `${score}/5`
             : difficulty == "medium"
             ? `${score}/10`
             : `${score}/15`}
         </div>
-        {gameOver ? <GameOver /> : null}
+        {gameOver ? (
+          <GameOver
+            setFlag={setFlag}
+            score={score}
+            setGameOver={setGameOver}
+            setScore={setScore}
+            setSelectedArr={setSelectedArr}
+            difficulty={difficulty}
+          />
+        ) : null}
         {difficulty == "easy" ? (
           score == 5 ? (
             <Congrats />
