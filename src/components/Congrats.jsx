@@ -1,9 +1,20 @@
 import Icon from "@mdi/react";
-import { mdiReplay, mdiHome } from "@mdi/js";
+import { mdiReplay } from "@mdi/js";
 
-export default function Congrats({ score, setFlag, setScore, setSelectedArr }) {
+export default function Congrats({
+  score,
+  setFlag,
+  setScore,
+  setSelectedArr,
+  difficulty,
+}) {
   return (
-    <div className="h-screen w-screen flex items-center justify-center absolute ">
+    <div
+      className={`h-screen w-screen flex items-center justify-center absolute ${
+        difficulty == "hard" ? "mb-100" : null
+      } 
+    `}
+    >
       <div className="w-1/2 flex items-center justify-around flex-col bg-black h-2/3 font-display gap-3 text-white border-8 border-white rounded-md p-8">
         <p className="text-4xl text-red-600">Congrats!! You Won!!</p>
         <div className="flex justify-around items-center w-full">

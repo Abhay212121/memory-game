@@ -138,6 +138,7 @@ function Game({ animeId, difficulty, setFlag }) {
               score={score}
               setSelectedArr={setSelectedArr}
               setScore={setScore}
+              difficulty={difficulty}
             />
           ) : null
         ) : difficulty == "medium" ? (
@@ -147,6 +148,7 @@ function Game({ animeId, difficulty, setFlag }) {
               score={score}
               setScore={setScore}
               setSelectedArr={setSelectedArr}
+              difficulty={difficulty}
             />
           ) : null
         ) : score == 15 ? (
@@ -155,6 +157,7 @@ function Game({ animeId, difficulty, setFlag }) {
             score={score}
             setScore={setScore}
             setSelectedArr={setSelectedArr}
+            difficulty={difficulty}
           />
         ) : null}
       </div>
