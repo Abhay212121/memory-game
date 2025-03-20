@@ -133,14 +133,29 @@ function Game({ animeId, difficulty, setFlag }) {
         ) : null}
         {difficulty == "easy" ? (
           score == 5 ? (
-            <Congrats />
+            <Congrats
+              setFlag={setFlag}
+              score={score}
+              setSelectedArr={setSelectedArr}
+              setScore={setScore}
+            />
           ) : null
         ) : difficulty == "medium" ? (
           score == 10 ? (
-            <Congrats />
+            <Congrats
+              setFlag={setFlag}
+              score={score}
+              setScore={setScore}
+              setSelectedArr={setSelectedArr}
+            />
           ) : null
         ) : score == 15 ? (
-          <Congrats />
+          <Congrats
+            setFlag={setFlag}
+            score={score}
+            setScore={setScore}
+            setSelectedArr={setSelectedArr}
+          />
         ) : null}
       </div>
     </>

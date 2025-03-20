@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
   const [alertData, setAlertData] = useState("");
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setAnimeId(0);
+    setDifficulty("");
+  }, [visible]);
 
   return (
     <>
@@ -101,7 +106,7 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
             onClick={() => {
               setVisible(true);
               if (animeId == 0 && difficulty == "") {
-                setAlertDatalertData("select the details");
+                setAlertData("select the details");
               } else if (animeId == 0) {
                 setAlertData("Select an anime");
               } else if (difficulty == "") {
