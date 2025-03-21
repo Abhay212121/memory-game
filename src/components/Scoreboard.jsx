@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { setHighScoreData, getHighScoreData } from "../utils/data";
 
-export default function Scoreboard({ score, highScore, setHighScore }) {
+export default function Scoreboard({ score, animeId, difficulty }) {
   const [visible, setVisible] = useState(false);
+  const [highScore, setHighScore] = useState(
+    getHighScoreData(animeId, difficulty)
+  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -11,6 +15,7 @@ export default function Scoreboard({ score, highScore, setHighScore }) {
 
   useEffect(() => {
     if (score > highScore) {
+      setHighScoreData(animeId, difficulty, score);
       setHighScore(score);
     }
   }, [score]);

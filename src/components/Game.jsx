@@ -11,7 +11,6 @@ function Game({ animeId, difficulty, setFlag }) {
   const [displayArr, setDisplayArr] = useState([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [highScore, setHighScore] = useState(0);
   const [visible, setVisible] = useState(false);
 
   //fetching the data
@@ -80,8 +79,8 @@ function Game({ animeId, difficulty, setFlag }) {
       <Loading />
       <Scoreboard
         score={score}
-        highScore={highScore}
-        setHighScore={setHighScore}
+        animeId={animeId}
+        difficulty={difficulty}
       />
       <div
         className={
