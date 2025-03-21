@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Card from "./card";
+import Card from "./Card";
 import GameOver from "./Gameover";
 import Congrats from "./Congrats";
 import Loading from "./Loading";
 import Scoreboard from "./Scoreboard";
 
-function Game({ animeId, difficulty, setFlag }) {
+export default function Game({ animeId, difficulty, setFlag }) {
   const [data, setData] = useState([]);
   const [selectedArr, setSelectedArr] = useState([]);
   const [displayArr, setDisplayArr] = useState([]);
@@ -163,5 +163,3 @@ function Game({ animeId, difficulty, setFlag }) {
     </>
   );
 }
-
-export default Game;
