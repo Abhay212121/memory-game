@@ -11,7 +11,7 @@ function Welcome({ animeId, setDifficulty, difficulty, setAnimeId, setFlag }) {
 
   return (
     <>
-      <div className="w-screen h-screen font-body flex flex-col items-center pt-50 bg-[url(images/bg01.jpg)] bg-center bg-cover">
+      <div className="w-screen h-screen font-body flex flex-col items-center pt-50 bg-[url('https://res.cloudinary.com/df0xhk8mc/image/upload/v1742583585/bg01_cd26oi.jpg')] bg-center bg-cover">
         <div className="text-3xl text-white p-20 flex items-center justify-around w-full ">
           <div className="flex flex-col items-center gap-3">
             <h2 className="border-b-3">Select your difficulty</h2>
