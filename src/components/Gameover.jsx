@@ -16,14 +16,14 @@ export default function GameOver({
       }`}
     >
       <div
-        className={`w-1/2 flex items-center justify-around flex-col bg-black h-2/3 font-display gap-3 text-white border-8 border-white rounded-md p-8  `}
+        className={`w-1/2 flex items-center my-auto justify-center gap-7 flex-col bg-black h-2/3 font-display 2xl:gap-3 text-white border-8 border-white rounded-md p-8  `}
       >
         <p className="text-4xl text-red-600">Game over!</p>
         <div className="flex">
           <Icon
             path={mdiHome}
             size={10}
-            className="font-display hover:cursor-pointer"
+            className="font-display xl:p-5 2xl:p-0 hover:cursor-pointer"
             onClick={() => {
               setFlag(true);
             }}
@@ -32,7 +32,7 @@ export default function GameOver({
           <Icon
             path={mdiReplay}
             size={10}
-            className="font-display hover:cursor-pointer"
+            className="font-display xl:p-5 2xl:p-0 hover:cursor-pointer"
             onClick={() => {
               setFlag(false);
               setGameOver(false);

@@ -16,7 +16,7 @@ export default function Congrats({
     `}
     >
       <div className="w-1/2 flex items-center justify-around flex-col bg-black h-2/3 font-display gap-3 text-white border-8 border-white rounded-md p-8">
-        <p className="text-4xl text-red-600">Congrats!! You Won!!</p>
+        <p className="text-3xl text-red-600">Congrats!! You Won!!</p>
         <div className="flex justify-around items-center w-full">
           <img
             src="/images/congrats.gif"

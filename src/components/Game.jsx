@@ -97,7 +97,7 @@ export default function Game({ animeId, difficulty, setFlag }) {
               ? `flex`
               : difficulty == "medium"
               ? "grid grid-flow-col gap-y-3 grid-rows-2 w-2/3 bg-black"
-              : "grid grid-flow-col grid-rows-4 gap-y-3 bg-black"
+              : "grid grid-flow-col grid-rows-4  bg-black"
           }
         >
           {displayArr.map((element) => {
@@ -113,7 +113,7 @@ export default function Game({ animeId, difficulty, setFlag }) {
             );
           })}
         </div>
-        <div className="text-4xl text-white font-body">
+        <div className="text-3xl 2xl:text-4xl text-white w-fit 2xl:ml-0 xl:ml-20 text-center font-body">
           {difficulty == "easy"
             ? `${score}/5`
             : difficulty == "medium"
